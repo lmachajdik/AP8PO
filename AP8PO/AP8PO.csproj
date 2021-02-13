@@ -63,6 +63,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseCommit.cs" />
+    <Compile Include="Enums\CourseCompletionTypes.cs" />
+    <Compile Include="Enums\CourseType.cs" />
+    <Compile Include="Enums\LoadTypes.cs" />
+    <Compile Include="Enums\SemesterTaught.cs" />
+    <Compile Include="Models\StudyProgramme.cs" />
+    <Compile Include="Models\Teacher.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -86,6 +94,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Preparation\ClassDiagram.cd" />
     <None Include="Preparation\scenario.md" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
