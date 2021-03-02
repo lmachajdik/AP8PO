@@ -63,14 +63,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\StudyType.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseCommit.cs" />
     <Compile Include="Enums\CourseCompletionTypes.cs" />
     <Compile Include="Enums\CourseType.cs" />
     <Compile Include="Enums\LoadTypes.cs" />
-    <Compile Include="Enums\SemesterTaught.cs" />
-    <Compile Include="Models\StudyProgramme.cs" />
-    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Enums\Semester.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Enums\StudyForm.cs" />
+    <Compile Include="Enums\Language.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

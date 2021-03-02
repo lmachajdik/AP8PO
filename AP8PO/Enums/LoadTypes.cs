@@ -2,6 +2,7 @@
 {
     public enum LoadTypes 
     { 
+        Agreement,
         HalfTime, 
         FullTime, 
         Other 

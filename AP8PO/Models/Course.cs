@@ -2,14 +2,19 @@
 
 namespace AP8PO
 {
-    internal class Course
+    public class Course
     {
         public string Name { get; set; }
         public string Abbrevation { get; set; }
-        public int WeekHours { get; set; }
-        public SemesterTaught Semester { get; set; }
+        public int NumberOfWeeks { get; set; }
+
+        public int HoursOfLectures { get; set; }
+        public int HoursOfClasses { get; set; }
+        public int HoursOfSeminars { get; set; }
+
         public CourseCompletionTypes CompletionType { get; set; }
-        public List<CourseCommit> Commits { get; set; }
+        public Language Language { get; set; }
+        public int MaxStudents { get; set; }
     }
 
 }

@@ -1,6 +1,6 @@
 ﻿namespace AP8PO
 {
-    public enum SemesterTaught 
+    public enum Semester
     { 
         Summer, 
         Winter 
