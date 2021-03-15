@@ -87,11 +87,16 @@ namespace AP8PO.UserControls
             LoadTypeCb.ItemsSource = Enum.GetValues(typeof(LoadTypes)).Cast<LoadTypes>();
             LoadTypeCb.SelectionChanged += (object sender, SelectionChangedEventArgs e) =>
             {
-                LoadTypes loadType = (LoadTypes)Enum.Parse(typeof(LoadTypes), LoadTypeCb.SelectedItem?.ToString());
-                LoadTypeOtherPercentualTb.IsEnabled = loadType == LoadTypes.Other;
+                if (list.SelectedItem == null)
+                    return;
 
-                if (loadType != LoadTypes.Other)
+                LoadTypes loadType = (LoadTypes)Enum.Parse(typeof(LoadTypes), LoadTypeCb.SelectedItem?.ToString());
+                bool isLoadTypeOther = loadType == LoadTypes.Other;
+
+                if (isLoadTypeOther == false)
                     LoadTypeOtherPercentualTb.Text = Convert.ToString((int)loadType);
+
+                LoadTypeOtherPercentualTb.IsEnabled = isLoadTypeOther;
             };
         }
 

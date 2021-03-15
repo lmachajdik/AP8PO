@@ -9,7 +9,7 @@
     <Grid>
         <TabControl TabStripPlacement="Left">
             <TabItem Header="Employee">
-                <local1:ManageEmployeeControl/>
+                <local1:ManageEmployeeControl></local1:ManageEmployeeControl>
             </TabItem>
             <TabItem Header="Groups">
                 <local:ManageGroupControl/>
