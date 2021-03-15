@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AP8PO
 {
-    internal class Group
+    public class Group
     {
         public string Name { get; set; }
         public string Abbrevation { get; set; }

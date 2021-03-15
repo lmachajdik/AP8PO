@@ -13,7 +13,7 @@
     </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAIAAAAACAAAQAAQAAAAQAYAAAAAAAEAAABAAAAAAAA=</HashCode>
-      <FileName>Models\Course.cs</FileName>
+      <FileName>Application\Models\Course.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="CompletionType" />
@@ -22,25 +22,25 @@
   </Class>
   <Class Name="AP8PO.CourseCommit">
     <Position X="4.25" Y="2.25" Width="2" />
+    <AssociationLine Name="Employee" Type="AP8PO.Employee">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.942" Y="0.133" Height="0.182" Width="1.358" />
+      </MemberNameLabel>
+    </AssociationLine>
     <AssociationLine Name="CourseType" Type="AP8PO.CourseType" FixedFromPoint="true">
       <Path>
         <Point X="4.25" Y="3.225" />
         <Point X="3" Y="3.225" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="Employee" Type="AP8PO.Employee">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-1.005" Y="0.133" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAQAAAACAgQAAAAAIAAAAQACAAAAAEAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\CourseCommit.cs</FileName>
+      <FileName>Application\Models\CourseCommit.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
+      <Property Name="Employee" />
       <Property Name="CourseType" />
       <Property Name="Language" />
-      <Property Name="Employee" />
     </ShowAsAssociation>
   </Class>
   <Class Name="AP8PO.Employee">
@@ -56,8 +56,8 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>EAIAAAAAgAAAACAAAAAAAAQABAIgAEAAAMAAAAAAAAA=</HashCode>
-      <FileName>Models\Employee.cs</FileName>
+      <HashCode>EAIAAAAAgAAAACAEAAAAAAQABAMgAEAAAMAAAAAAAAA=</HashCode>
+      <FileName>Application\Models\Employee.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="LoadType" />
@@ -87,7 +87,7 @@
     </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAgAAABAAAAAAAIAAAAAQAAAAAAAEgAACAABAAAAA=</HashCode>
-      <FileName>Models\Group.cs</FileName>
+      <FileName>Application\Models\Group.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Semester" />
@@ -102,49 +102,49 @@
     <Position X="11" Y="1" Width="2" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Enums\CourseCompletionTypes.cs</FileName>
+      <FileName>Application\Enums\CourseCompletionTypes.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AP8PO.CourseType">
     <Position X="1.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAA=</HashCode>
-      <FileName>Enums\CourseType.cs</FileName>
+      <FileName>Application\Enums\CourseType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AP8PO.Language">
     <Position X="4.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAEAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Enums\Language.cs</FileName>
+      <FileName>Application\Enums\Language.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AP8PO.LoadTypes">
     <Position X="1.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAAAgAAAAAACAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Enums\LoadTypes.cs</FileName>
+      <FileName>Application\Enums\LoadTypes.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AP8PO.Semester">
     <Position X="11" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAAAAAAAAAA=</HashCode>
-      <FileName>Enums\Semester.cs</FileName>
+      <FileName>Application\Enums\Semester.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AP8PO.StudyForm">
     <Position X="11" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAAAAA=</HashCode>
-      <FileName>Enums\StudyForm.cs</FileName>
+      <FileName>Application\Enums\StudyForm.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AP8PO.Enums.StudyType">
     <Position X="11" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Enums\StudyType.cs</FileName>
+      <FileName>Application\Enums\StudyType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

@@ -4,6 +4,7 @@ namespace AP8PO
 {
     public class CourseCommit
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Abbrevation { get; set; }
         public int Hours { get; set; }

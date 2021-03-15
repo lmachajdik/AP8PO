@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="AP8PO.UserControls.ManageEmployeeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AP8PO.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel Background="White">
+        <Grid DockPanel.Dock="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="6*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.RowSpan="3">
+                    <Button DockPanel.Dock="Bottom" Click="AddEmployeeButton_Click" Margin="0,10,0,10" HorizontalAlignment="Center" VerticalAlignment="Bottom">Add Employee</Button>
+                <ListView x:Name="list">
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ItemContextMenu">
+                            <MenuItem DataContext="{Binding}" Header="Delete me" Click="ContextMenuDelete_Click"></MenuItem>
+                        </ContextMenu>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}" >
+                            <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding Name}"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding Surname}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
+            </DockPanel>
+            <GroupBox Grid.Row="1" Grid.Column="2" Header="Employee Edit" VerticalAlignment="Stretch" Margin="0,10,0,50">
+                    <DockPanel Margin="0,10,0,10">
+                    <Grid x:Name="formGrid" Grid.IsSharedSizeScope="True" DockPanel.Dock="Top" DataContext="{Binding SelectedEmployee}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition SharedSizeGroup="AA" MaxHeight="100"></RowDefinition>
+                            <RowDefinition SharedSizeGroup="AA"></RowDefinition>
+                            <RowDefinition SharedSizeGroup="AA"></RowDefinition>
+                            <RowDefinition SharedSizeGroup="AA"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="A"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition SharedSizeGroup="A"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0">Name</Label>
+                        <TextBox x:Name="NameTb" Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+                        <Label Grid.Row="0" Grid.Column="2">Surname</Label>
+                        <TextBox x:Name="SurnameTb" Grid.Row="0" Grid.Column="3" Text="{Binding Surname}"/>
+
+                        <Label Grid.Row="1" Grid.Column="0">Work Email</Label>
+                        <TextBox x:Name="WorkEmailTb" Grid.Row="1" Grid.Column="1" Text="{Binding WorkEmail}"/>
+                        <Label Grid.Row="1" Grid.Column="2">Personal Email</Label>
+                        <TextBox x:Name="PersonalEmailTb" Grid.Row="1" Grid.Column="3" Text="{Binding PersonalEmail}"/>
+
+                        <Label Grid.Row="2" Grid.Column="0">Telephone</Label>
+                        <TextBox x:Name="TelephoneTb" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Telephone}"/>
+
+                        <Label Grid.Row="3" Grid.Column="0">Load type</Label>
+                        <ComboBox x:Name="LoadTypeCb" Grid.Row="3" Grid.Column="1" Text="{Binding Path=LoadType, Mode=OneWay}"></ComboBox>
+
+                        <Label  Grid.Row="3" Grid.Column="2">Other type (%)</Label>
+                        <TextBox x:Name="LoadTypeOtherPercentualTb" Grid.Row="3" Grid.Column="3" IsEnabled="{Binding LoadTypePercentualEnabled}"  Text="{Binding LoadPercent}"></TextBox>
+                        <DockPanel Grid.ColumnSpan="4" Grid.Row="3"></DockPanel>
+                    </Grid>
+
+                </DockPanel>
+                </GroupBox>
+            <Button Click="ConfirmButton_Click" Grid.Row="2" Grid.Column="2"  DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,10,0,10">Confirm Changes</Button>
+            </Grid>
+    </DockPanel>
+</UserControl>

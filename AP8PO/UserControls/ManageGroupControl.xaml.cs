@@ -1,6 +1,6 @@
-﻿using AP8PO.Database.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +17,21 @@ using System.Windows.Shapes;
 namespace AP8PO
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ManageGroupControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ManageGroupControl : UserControl
     {
-        public MainWindow()
+        internal ObservableCollection<Group> Groups { get; set; }
+
+        public ManageGroupControl()
         {
             InitializeComponent();
+            list.ItemsSource = Groups;
+        }
+
+        private void AddGroupButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
