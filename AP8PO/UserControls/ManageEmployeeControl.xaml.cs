@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AP8PO.UserControls
-{
+{  
     public class EmployeeViewModel : Model
     {
         private Employee selectedEmployee;
@@ -68,12 +68,12 @@ namespace AP8PO.UserControls
     /// </summary>
     public partial class ManageEmployeeControl : UserControl
     {
-
         public EmployeeViewModel ViewModel = new EmployeeViewModel();
 
         public ManageEmployeeControl()
         {
             InitializeComponent();
+
 
             DataConnection.DbContext.Employees.Load();
 
@@ -81,10 +81,10 @@ namespace AP8PO.UserControls
             list.SelectionChanged += (object sender, SelectionChangedEventArgs e) =>
             {
                 ViewModel.SelectedEmployee = ((ListView)(sender)).SelectedItem as Employee;
-                formGrid.DataContext = ViewModel.SelectedEmployee;
+                //formGrid.DataContext = ViewModel.SelectedEmployee;
             };
 
-            LoadTypeCb.ItemsSource = Enum.GetValues(typeof(LoadTypes)).Cast<LoadTypes>();
+            /*LoadTypeCb.ItemsSource = Enum.GetValues(typeof(LoadTypes)).Cast<LoadTypes>();
             LoadTypeCb.SelectionChanged += (object sender, SelectionChangedEventArgs e) =>
             {
                 if (list.SelectedItem == null)
@@ -97,7 +97,7 @@ namespace AP8PO.UserControls
                     LoadTypeOtherPercentualTb.Text = Convert.ToString((int)loadType);
 
                 LoadTypeOtherPercentualTb.IsEnabled = isLoadTypeOther;
-            };
+            };*/
         }
 
         private void AddEmployeeButton_Click(object sender, RoutedEventArgs e)
