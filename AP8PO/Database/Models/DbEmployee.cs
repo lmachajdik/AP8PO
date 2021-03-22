@@ -23,7 +23,7 @@ namespace AP8PO.Database.Models
         {
             return new Employee()
             {
-                Name = this.Name,
+                FirstName = this.Name,
                 Surname = this.Surname,
                 Telephone = this.Telephone,
                 WorkEmail = this.WorkEmail,

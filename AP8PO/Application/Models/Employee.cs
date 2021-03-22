@@ -1,4 +1,6 @@
 ﻿using AP8PO.Database.Models;
+using AP8PO.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -15,12 +17,18 @@ namespace AP8PO
         }
     }
 
-    public class Employee
+    public static class Extensions
     {
+        public static IEnumerable<LoadTypes> GetEnumTypes => (IEnumerable<LoadTypes>)Enum.GetValues(typeof(LoadTypes));
+    }
+
+    public class Employee : Model
+    {
+
         public const int FullTimeMaxHours = 160;
 
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Telephone { get; set; }
         public string WorkEmail { get; set; }
@@ -30,7 +38,7 @@ namespace AP8PO
         public int LoadPercent { get; set; } //uvazok - 100% = fullTime
         public int MaxLoad => (int)(FullTimeMaxHours * LoadPercent / 100.0);
 
-        public List<CourseCommit> Commits { get; set; }
+        //public LoadTypes LT { get; set; }
 
         public LoadTypes LoadType
         {
@@ -45,12 +53,13 @@ namespace AP8PO
                 }
             }
         }
+        public List<CourseCommit> Commits { get; set; }
 
         public DbEmployee ToDbEmployee()
         {
             return new DbEmployee()
             {
-                Name = this.Name,
+                Name = this.FirstName,
                 Surname = this.Surname,
                 Telephone = this.Telephone,
                 WorkEmail = this.WorkEmail,
@@ -63,7 +72,7 @@ namespace AP8PO
 
         public override string ToString()
         {
-            return Name + " " + Surname;
+            return FirstName + " " + Surname;
         }
     }
 

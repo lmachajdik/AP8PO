@@ -11,13 +11,23 @@ namespace AP8PO.UserControls
             {
                 new Employee()
                 {
-                    Name = "Erik",
+                    FirstName = "Erik",
                     Surname = "Kral",
                     LoadPercent = 100,
                     WorkEmail = "ekral@utb.cz",
+                    PrivateEmail = "kral@gmail.com",
                     Doctorand=false,
                     Telephone="+42012345678"
-                }
+                },
+                new Employee()
+                {
+                    FirstName = "Tomas",
+                    Surname = "Juřena",
+                    LoadPercent = 100,
+                    WorkEmail = "jurena@utb.cz",
+                    Doctorand=true,
+                    Telephone="+42087654321"
+                },
             };
         }
         

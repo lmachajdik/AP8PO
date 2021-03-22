@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -16,7 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AP8PO.UserControls
-{  
+{
     public class EmployeeViewModel : Model
     {
         private Employee selectedEmployee;
@@ -39,22 +41,15 @@ namespace AP8PO.UserControls
 
         public Employee CreateNew()
         {
-            var employee = new Employee()
-            {
-                Name = "New"
-            };
-            
+            var employee = new Employee();
             SelectedEmployee = employee;
             DataConnection.DbContext.Insert(employee);
-            ConfirmChanges();
             return employee;
         }
 
         public void Remove(Employee employee)
         {
             DataConnection.DbContext.Delete(employee);
-            ConfirmChanges();
-
         }
 
         public void ConfirmChanges()
@@ -80,7 +75,7 @@ namespace AP8PO.UserControls
             list.ItemsSource = DataConnection.DbContext.Employees.Local;
             list.SelectionChanged += (object sender, SelectionChangedEventArgs e) =>
             {
-                ViewModel.SelectedEmployee = ((ListView)(sender)).SelectedItem as Employee;
+              //  ViewModel.SelectedEmployee = ((Dt)(sender)).SelectedItem as Employee;
                 //formGrid.DataContext = ViewModel.SelectedEmployee;
             };
 
@@ -110,9 +105,9 @@ namespace AP8PO.UserControls
             ViewModel.ConfirmChanges();
         }
 
-        private void ContextMenuDelete_Click(object sender, RoutedEventArgs e)
+        private void DeleteEmployeeButton_Click(object sender, RoutedEventArgs e)
         {
-            Employee employee = (Employee)((sender as MenuItem).DataContext);
+            Employee employee = (Employee)((sender as Button).DataContext);
             ViewModel.Remove(employee);
         }
     }

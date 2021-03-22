@@ -3,69 +3,82 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
- xmlns:ap8po="clr-namespace:AP8PO" xmlns:usercontrols="clr-namespace:AP8PO.UserControls"
+             xmlns:usercontrols="clr-namespace:AP8PO.UserControls" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib" 
+             xmlns:ap8po="clr-namespace:AP8PO"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <usercontrols:MockEmployeeData x:Key="DesignViewModel"/>
+        <ResourceDictionary>
+            <usercontrols:MockEmployeeData x:Key="DesignViewModel"/>
+            <ObjectDataProvider x:Key="EnumDataProvider" 
+                    MethodName="GetValues" 
+                    ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="ap8po:LoadTypes"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
-            <ListView x:Name="list" d:DataContext="{Binding Source={StaticResource DesignViewModel}}" ItemsSource="{Binding MyListBoxItems}">
-                <ListView.Resources>
-                    <ContextMenu x:Key="ItemContextMenu">
-                        <MenuItem DataContext="{Binding}" Header="Delete me" Click="ContextMenuDelete_Click"></MenuItem>
-                    </ContextMenu>
-                </ListView.Resources>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}" >
-                        <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid x:Name="formGrid" Grid.IsSharedSizeScope="True" DataContext="{Binding SelectedEmployee}" HorizontalAlignment="Stretch">
-                            <Grid.RowDefinitions>
-                                <RowDefinition SharedSizeGroup="AA" MaxHeight="100"></RowDefinition>
-                                <RowDefinition SharedSizeGroup="AA"></RowDefinition>
-                                <RowDefinition SharedSizeGroup="AA"></RowDefinition>
-                                <RowDefinition SharedSizeGroup="AA"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition SharedSizeGroup="A"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                                <ColumnDefinition SharedSizeGroup="A"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0">Name</Label>
-                            <TextBox x:Name="NameTb" Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
-                            <Label Grid.Row="0" Grid.Column="2">Surname</Label>
-                            <TextBox x:Name="SurnameTb" Grid.Row="0" Grid.Column="3" Text="{Binding Surname}"/>
-
-                            <Label Grid.Row="1" Grid.Column="0">Work Email</Label>
-                            <TextBox x:Name="WorkEmailTb" Grid.Row="1" Grid.Column="1" Text="{Binding WorkEmail}"/>
-                            <Label Grid.Row="1" Grid.Column="2">Personal Email</Label>
-                            <TextBox x:Name="PersonalEmailTb" Grid.Row="1" Grid.Column="3" Text="{Binding PersonalEmail}"/>
-
-                            <Label Grid.Row="2" Grid.Column="0">Telephone</Label>
-                            <TextBox x:Name="TelephoneTb" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Telephone}"/>
-
-                            <Label Grid.Row="3" Grid.Column="0">Load type</Label>
-                            <ComboBox x:Name="LoadTypeCb" Grid.Row="3" Grid.Column="1" Text="{Binding Path=LoadType, Mode=OneWay}"></ComboBox>
-
-                            <Label  Grid.Row="3" Grid.Column="2">Other type (%)</Label>
-                            <TextBox x:Name="LoadTypeOtherPercentualTb" Grid.Row="3" Grid.Column="3" IsEnabled="{Binding LoadTypePercentualEnabled}"  Text="{Binding LoadPercent}"></TextBox>
-                            <DockPanel Grid.ColumnSpan="4" Grid.Row="3"></DockPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListView>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <ToolBarPanel Orientation="Horizontal" Grid.Row="0">
                 <Button DockPanel.Dock="Bottom" Click="AddEmployeeButton_Click" Margin="5,10,5,10" HorizontalAlignment="Center" VerticalAlignment="Bottom">Add Employee</Button>
                 <Button Click="ConfirmButton_Click" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,10,5,10">Confirm Changes</Button>
-            </StackPanel>
+            </ToolBarPanel>
+        <DataGrid Grid.Row="1"
+                  x:Name="list" 
+                  d:DataContext="{Binding Source={StaticResource DesignViewModel}}" 
+                  ItemsSource="{Binding MyListBoxItems}" 
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Surname}" />
+                <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" />
+                <DataGridTextColumn Header="Work Email" Binding="{Binding WorkEmail}" />
+                <DataGridTextColumn Header="Private Email" Binding="{Binding PrivateEmail}" />
+                <DataGridCheckBoxColumn  Header="Doctorand" Binding="{Binding Doctorand}" />
+                <DataGridTextColumn   Header="Load Percent" Binding="{Binding LoadPercent}" />
+                <!--
+                    <DataGridComboBoxColumn  Header="Load Type" SelectedItemBinding="{Binding LT}" SelectedValueBinding="{Binding LT}">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{x:Static ap8po:Extensions.GetEnumTypes}"/>
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{x:Static ap8po:Extensions.GetEnumTypes}"/>
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                    </DataGridComboBoxColumn>
+                    -->
+                <DataGridTextColumn  Header="Max Load" Binding="{Binding MaxLoad}" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" Command="Delete"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
 
-        </StackPanel>
+            <DataGrid.Resources>
+                <ContextMenu x:Key="ItemContextMenu">
+                    <MenuItem DataContext="{Binding}" Header="Delete me" Click="DeleteEmployeeButton_Click"></MenuItem>
+                </ContextMenu>
+            </DataGrid.Resources>
+            <!--
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Margin="10" />
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>-->
+        </DataGrid>
     </Grid>
 </UserControl>
