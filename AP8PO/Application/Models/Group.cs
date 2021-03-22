@@ -5,6 +5,7 @@ namespace AP8PO
 {
     public class Group
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Abbrevation { get; set; }
 
@@ -15,6 +16,6 @@ namespace AP8PO
         public int StudentsCount { get; set; }
         public int Year { get; set; }
 
-        public List<Course> Courses { get; set; }
+        //public List<Course> Courses { get; set; }
     }
 }

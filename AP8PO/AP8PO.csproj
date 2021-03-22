@@ -67,7 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UserControls\MockEmployeeData.cs" />
+    <Compile Include="Application\Models\Extensions.cs" />
+    <Compile Include="Application\Models\Model.cs" />
+    <Compile Include="MockData\MockEmployeeData.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,6 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MockData\MockGroupData.cs" />
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Application\Enums\StudyType.cs" />
     <Compile Include="Database\Models\DbCourseCommit.cs" />

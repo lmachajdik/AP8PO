@@ -1,13 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace AP8PO.UserControls
+namespace AP8PO.MockData
 {
     public class MockEmployeeData
     {
-        public ObservableCollection<Employee> MyListBoxItems { get; set; }
+        public ObservableCollection<Employee> MockData { get; set; }
         public MockEmployeeData()
         {
-            MyListBoxItems = new ObservableCollection<Employee>()
+            MockData = new ObservableCollection<Employee>()
             {
                 new Employee()
                 {

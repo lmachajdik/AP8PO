@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:usercontrols="clr-namespace:AP8PO.UserControls" 
              xmlns:System="clr-namespace:System;assembly=mscorlib" 
-             xmlns:ap8po="clr-namespace:AP8PO"
+             xmlns:ap8po="clr-namespace:AP8PO" xmlns:mockdata="clr-namespace:AP8PO.MockData"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
-            <usercontrols:MockEmployeeData x:Key="DesignViewModel"/>
+            <mockdata:MockEmployeeData x:Key="DesignViewModel"/>
             <ObjectDataProvider x:Key="EnumDataProvider" 
                     MethodName="GetValues" 
                     ObjectType="{x:Type System:Enum}">
@@ -18,7 +18,6 @@
                     <x:Type TypeName="ap8po:LoadTypes"/>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -33,46 +32,14 @@
         <DataGrid Grid.Row="1"
                   x:Name="list" 
                   d:DataContext="{Binding Source={StaticResource DesignViewModel}}" 
-                  ItemsSource="{Binding MyListBoxItems}" 
-                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding MockData}" 
+                  AutoGenerateColumns="True"
                   CanUserAddRows="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
-                <DataGridTextColumn Header="Last Name" Binding="{Binding Surname}" />
-                <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" />
-                <DataGridTextColumn Header="Work Email" Binding="{Binding WorkEmail}" />
-                <DataGridTextColumn Header="Private Email" Binding="{Binding PrivateEmail}" />
-                <DataGridCheckBoxColumn  Header="Doctorand" Binding="{Binding Doctorand}" />
-                <DataGridTextColumn   Header="Load Percent" Binding="{Binding LoadPercent}" />
-                <!--
-                    <DataGridComboBoxColumn  Header="Load Type" SelectedItemBinding="{Binding LT}" SelectedValueBinding="{Binding LT}">
-                        <DataGridComboBoxColumn.ElementStyle>
-                            <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{x:Static ap8po:Extensions.GetEnumTypes}"/>
-                            </Style>
-                        </DataGridComboBoxColumn.ElementStyle>
-                        <DataGridComboBoxColumn.EditingElementStyle>
-                            <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{x:Static ap8po:Extensions.GetEnumTypes}"/>
-                            </Style>
-                        </DataGridComboBoxColumn.EditingElementStyle>
-                    </DataGridComboBoxColumn>
-                    -->
-                <DataGridTextColumn  Header="Max Load" Binding="{Binding MaxLoad}" IsReadOnly="True"/>
-                <DataGridTemplateColumn Header="Delete">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Delete" Command="Delete"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-
-            <DataGrid.Resources>
-                <ContextMenu x:Key="ItemContextMenu">
-                    <MenuItem DataContext="{Binding}" Header="Delete me" Click="DeleteEmployeeButton_Click"></MenuItem>
+            <DataGrid.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="Delete me" Click="DeleteEmployeeButton_Click" DataContext="{Binding list.DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Employee}}}" ></MenuItem>
                 </ContextMenu>
-            </DataGrid.Resources>
+            </DataGrid.ContextMenu>
             <!--
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>

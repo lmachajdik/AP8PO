@@ -4,6 +4,6 @@
     { 
         HalfTime=50, 
         FullTime=100,
-        Other
+        Agreement=0
     }
 }

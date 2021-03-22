@@ -17,7 +17,7 @@ namespace AP8PO
         }
 
         public DbSet<Employee> Employees { get; set; }
-        // public DbSet<Group> Groups { get; set; }
+        public DbSet<Group> Groups { get; set; }
 
         public void Insert(Employee employee)
         {

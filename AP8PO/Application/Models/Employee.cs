@@ -1,26 +1,9 @@
 ﻿using AP8PO.Database.Models;
 using AP8PO.Enums;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace AP8PO
 {
-    public class Model :INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-    }
-
-    public static class Extensions
-    {
-        public static IEnumerable<LoadTypes> GetEnumTypes => (IEnumerable<LoadTypes>)Enum.GetValues(typeof(LoadTypes));
-    }
 
     public class Employee : Model
     {
@@ -35,23 +18,59 @@ namespace AP8PO
         public string PrivateEmail { get; set; }
         public bool Doctorand { get; set; }
 
-        public int LoadPercent { get; set; } //uvazok - 100% = fullTime
-        public int MaxLoad => (int)(FullTimeMaxHours * LoadPercent / 100.0);
-
-        //public LoadTypes LT { get; set; }
-
-        public LoadTypes LoadType
+        private int _loadPercent;
+        public int LoadPercent //uvazok - 100% = fullTime
         {
             get
             {
-                switch (LoadPercent)
+                return _loadPercent;
+            }
+            set
+            {            
+                var val = GetLoadType(value);
+                if (val != LoadType)
                 {
-                   // case 0: return LoadTypes.Agreement;
+                    LoadType = val;
+                    OnPropertyChanged(nameof(LoadType));
+                }
+                _loadPercent = value;
+                OnPropertyChanged();
+
+            }
+
+        } 
+        public int MaxLoad => (int)(FullTimeMaxHours * LoadPercent / 100.0);
+
+        //public LoadTypes LT { get; set; }
+        private LoadTypes _loadType;
+        public LoadTypes LoadType 
+        { 
+            get
+            {
+                return _loadType;
+            }
+            set
+            {
+                _loadType = value;
+                int val = (int)value;
+                
+                if (LoadPercent != val)
+                {
+                    LoadPercent = val;
+                    OnPropertyChanged(nameof(LoadPercent));
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        public LoadTypes GetLoadType(int percent)
+        {
+                switch (percent)
+                {
                     case 50: return LoadTypes.HalfTime;
                     case 100: return LoadTypes.FullTime;
-                    default: return LoadTypes.Other;
+                    default: return LoadTypes.Agreement;
                 }
-            }
         }
         public List<CourseCommit> Commits { get; set; }
 
