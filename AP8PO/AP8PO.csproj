@@ -84,6 +84,9 @@
     <Compile Include="Database\Models\DbCourseCommit.cs" />
     <Compile Include="Database\Models\DbEmployee.cs" />
     <Compile Include="DataConnection.cs" />
+    <Compile Include="UserControls\ManageCourseControl.xaml.cs">
+      <DependentUpon>ManageCourseControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ManageEmployeeControl.xaml.cs">
       <DependentUpon>ManageEmployeeControl.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\ManageCourseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\ManageEmployeeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

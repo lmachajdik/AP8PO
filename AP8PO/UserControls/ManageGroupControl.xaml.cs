@@ -1,25 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AP8PO
 {
-    public class GroupViewModel
+    public class GroupViewModel : Model
     {
+        public GroupViewModel()
+        {
 
+        }
+
+        public Group CreateNew()
+        {
+            var group = new Group();
+            DataConnection.DbContext.Insert(group);
+            return group;
+        }
+
+        public void Remove(Group group)
+        {
+            DataConnection.DbContext.Delete(group);
+        }
+
+        public void ConfirmChanges()
+        {
+            DataConnection.DbContext.SaveChanges();
+        }
     }
 
     /// <summary>
@@ -47,7 +56,21 @@ namespace AP8PO
 
         private void AddGroupButton_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.CreateNew();
+        }
 
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ConfirmChanges();
+        }
+
+        private void DeleteGroupButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (list.SelectedItem is Group)
+            {
+                Group group = (Group)list.SelectedItem;
+                ViewModel.Remove(group);
+            }
         }
     }
 }

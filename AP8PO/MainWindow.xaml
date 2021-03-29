@@ -14,6 +14,9 @@
             <TabItem Header="Groups">
                 <local:ManageGroupControl/>
             </TabItem>
+            <TabItem Header="Courses">
+                <local1:ManageCourseControl/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
