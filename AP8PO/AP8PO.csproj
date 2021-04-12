@@ -67,8 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Application\Models\Extensions.cs" />
+    <Compile Include="Application\Extensions.cs" />
     <Compile Include="Application\Models\Model.cs" />
+    <Compile Include="MockData\MockCourseData.cs" />
     <Compile Include="MockData\MockEmployeeData.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +85,7 @@
     <Compile Include="Database\Models\DbCourseCommit.cs" />
     <Compile Include="Database\Models\DbEmployee.cs" />
     <Compile Include="DataConnection.cs" />
+    <Compile Include="Application\LocalData.cs" />
     <Compile Include="UserControls\ManageCourseControl.xaml.cs">
       <DependentUpon>ManageCourseControl.xaml</DependentUpon>
     </Compile>

@@ -1,10 +1,15 @@
 ﻿using AP8PO.Enums;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace AP8PO
 {
-    public class Group
+    public class Group : Model
     {
+        private ObservableCollection<Course> courses;
+
+        [Key]
         public int ID { get; set; }
         public string Name { get; set; }
         public string Abbrevation { get; set; }
@@ -16,6 +21,19 @@ namespace AP8PO
         public int StudentsCount { get; set; }
         public int Year { get; set; }
 
-        //public List<Course> Courses { get; set; }
+        public ObservableCollection<Course> Courses 
+        { 
+            get => courses;
+            set
+            {
+                courses = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public override string ToString()
+        {
+            return Abbrevation;
+        }
     }
 }

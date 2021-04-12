@@ -1,34 +1,82 @@
-﻿<UserControl x:Class="AP8PO.ManageGroupControl"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AP8PO" xmlns:mockdata="clr-namespace:AP8PO.MockData"
              xmlns:ap8po="clr-namespace:AP8PO"
+             xmlns:UserControls="clr-namespace:AP8PO.UserControls" x:Class="AP8PO.ManageGroupControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <mockdata:MockGroupData x:Key="DesignViewModel"/>
+            <mockdata:LocalData x:Key="LocalData"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="40"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition MaxHeight="40"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <ToolBarPanel Orientation="Horizontal" Grid.Row="0">
-            <Button DockPanel.Dock="Bottom" Click="AddGroupButton_Click" Margin="5,10,5,10" HorizontalAlignment="Center" VerticalAlignment="Bottom">Add Group</Button>
-            <Button Click="ConfirmButton_Click" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,10,5,10">Confirm Changes</Button>
+            <Button DockPanel.Dock="Bottom" Click="AddGroupButton_Click" Margin="5,10,5,10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Add Group"/>
+            <Button Click="ConfirmButton_Click" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,10,5,10" Content="Confirm Changes"/>
         </ToolBarPanel>
         <DataGrid x:Name="list" Grid.Row="1" d:DataContext="{Binding Source={StaticResource DesignViewModel}}" 
                   ItemsSource="{Binding MockData}" 
                   CanUserAddRows="True">
             <DataGrid.ContextMenu>
                 <ContextMenu >
-                    <MenuItem Header="Delete me" Click="DeleteGroupButton_Click" DataContext="{Binding list.DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Group}}}" ></MenuItem>
+                    <MenuItem Header="Delete me" Click="DeleteGroupButton_Click" DataContext="{Binding list.DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Group}}}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="1" Margin="0,0,10,0" >Assigned courses</Label>
+                        <DataGrid x:Name="allCoursesList" Grid.Row="2" ItemsSource="{Binding Courses}" AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Abbrevation" Binding="{Binding Abbrevation}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Language" Binding="{Binding Language}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Completion Type" Binding="{Binding CompletionType}" IsReadOnly="True"/>
+                                <DataGridTemplateColumn Header="">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Click="UnassignButtonClick">Unassign</Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Label Grid.Row="3" Margin="0,0,10,0">All courses</Label>
+                        <DataGrid ItemsSource="{Binding Source={StaticResource LocalData},Path=AllCourses}" Grid.Row="4" AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Abbrevation" Binding="{Binding Abbrevation}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Language" Binding="{Binding Language}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Group" Binding="{Binding Group.Abbrevation}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Completion Type" Binding="{Binding CompletionType}" IsReadOnly="True"/>
+                                <DataGridTemplateColumn Header="">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Click="AssignButtonClick">Assign</Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
     </Grid>
 </UserControl>

@@ -1,11 +1,39 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AP8PO
 {
-    public class Course
+    public class Course : Model
     {
+        private Group group;
+        private int? groupID;
+        private string name;
+
+        [Key]
         public int ID { get; set; }
-        public string Name { get; set; }
+
+        [ForeignKey("Group")]
+        public int? GroupID
+        {
+            get => groupID;
+            set
+            {
+                groupID = value;
+                OnPropertyChanged();
+            }
+        }
+        public Group Group
+        {
+            get => group;
+            set
+            {
+                group = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Name { get => name; set { name = value; OnPropertyChanged(); } }
         public string Abbrevation { get; set; }
         public int MaxStudents { get; set; }
 

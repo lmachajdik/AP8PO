@@ -22,7 +22,15 @@ namespace AP8PO.MockData
                     StudentsCount=12,
                     StudyType=Enums.StudyType.Bachelor,
                     StudyForm=StudyForm.Daily,
-                    Year=1 
+                    Year=1,
+                    Courses = new ObservableCollection<Course>()
+                    {
+                       new Course()
+                       {
+                            Abbrevation="AP8PO",
+                            Name="Pokrocile programovani"
+                       }
+                    }
                 }
             };
         }

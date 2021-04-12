@@ -72,7 +72,7 @@ namespace AP8PO
                     default: return LoadTypes.Agreement;
                 }
         }
-        public List<CourseCommit> Commits { get; set; }
+        public ICollection<CourseCommit> Commits { get; set; }
 
         public DbEmployee ToDbEmployee()
         {
