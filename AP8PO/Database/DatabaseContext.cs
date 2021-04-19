@@ -19,6 +19,12 @@ namespace AP8PO
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseCommit> CourseCommits { get; set; }
+
+        public void Insert(CourseCommit commit)
+        {
+            CourseCommits.Local.Add(commit);
+        }
 
         public void Insert(Group group)
         {

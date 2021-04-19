@@ -15,9 +15,9 @@ namespace AP8PO.MockData
                     Name="First Group",
                     CompletionType = CourseCompletionTypes.Examination,
                     Language=Language.Czech,
-                    MaxStudents=24,
+                    MaxStudentsPerClass=24,
                     HoursOfLectures=2,
-                    HoursOfClasses=2,
+                    HoursOfPractises=2,
                     HoursOfSeminars=0
                 }
             };

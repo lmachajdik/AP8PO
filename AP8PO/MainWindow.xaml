@@ -17,6 +17,9 @@
             <TabItem Header="Courses">
                 <local1:ManageCourseControl/>
             </TabItem>
+            <TabItem Header="Commits">
+                <local1:ManageCommitsControl/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

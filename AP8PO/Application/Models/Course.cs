@@ -9,6 +9,7 @@ namespace AP8PO
         private Group group;
         private int? groupID;
         private string name;
+        private string abbrevation;
 
         [Key]
         public int ID { get; set; }
@@ -34,16 +35,21 @@ namespace AP8PO
         }
 
         public string Name { get => name; set { name = value; OnPropertyChanged(); } }
-        public string Abbrevation { get; set; }
-        public int MaxStudents { get; set; }
+        public string Abbrevation { get => abbrevation; set { abbrevation = value; OnPropertyChanged(); } }
+        public int MaxStudentsPerClass { get; set; }
 
         public int NumberOfWeeks { get; set; }
         public int HoursOfLectures { get; set; }
-        public int HoursOfClasses { get; set; }
+        public int HoursOfPractises { get; set; }
         public int HoursOfSeminars { get; set; }
 
         public CourseCompletionTypes CompletionType { get; set; }
         public Language Language { get; set; }
+
+        public override string ToString()
+        {
+            return Abbrevation;
+        }
 
     }
 
