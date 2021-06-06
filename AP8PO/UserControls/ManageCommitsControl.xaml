@@ -7,11 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel>
-            <Button Click="GenerateCommits_ButtonClick">Generate commits</Button>
-            <DataGrid x:Name="list" ItemsSource="{Binding CourseCommits}" IsReadOnly="True">
-                
-            </DataGrid>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Click="GenerateCommits_ButtonClick">Generate commits</Button>
+        <DataGrid Grid.Row="1" x:Name="list" ItemsSource="{Binding CourseCommits}" IsReadOnly="True" 
+                      ScrollViewer.CanContentScroll="True" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+        </DataGrid>
     </Grid>
 </UserControl>

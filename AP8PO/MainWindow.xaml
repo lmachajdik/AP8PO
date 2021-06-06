@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TabControl TabStripPlacement="Left">
+        <TabControl x:Name="tabControl" TabStripPlacement="Left">
             <TabItem Header="Employee">
                 <local1:ManageEmployeeControl></local1:ManageEmployeeControl>
             </TabItem>
