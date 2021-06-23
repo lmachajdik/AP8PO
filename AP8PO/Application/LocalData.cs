@@ -10,5 +10,6 @@ namespace AP8PO.MockData
     public class LocalData
     {
         public ObservableCollection<Course> AllCourses => DataConnection.DbContext.Courses.Local;
+        public ObservableCollection<Employee> AllEmployees => DataConnection.DbContext.Employees.Local;
     }
 }

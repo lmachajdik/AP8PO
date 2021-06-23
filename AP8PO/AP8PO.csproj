@@ -83,7 +83,6 @@
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Application\Enums\StudyType.cs" />
     <Compile Include="Database\Models\DbCourseCommit.cs" />
-    <Compile Include="Database\Models\DbEmployee.cs" />
     <Compile Include="DataConnection.cs" />
     <Compile Include="Application\LocalData.cs" />
     <Compile Include="UserControls\ManageCommitsControl.xaml.cs">

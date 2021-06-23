@@ -1,6 +1,7 @@
 ﻿using AP8PO.Database.Models;
 using AP8PO.Enums;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace AP8PO
 {
@@ -19,6 +20,8 @@ namespace AP8PO
         public bool Doctorand { get; set; }
 
         private int _loadPercent;
+        private int _currentLoad;
+
         public int LoadPercent //uvazok - 100% = fullTime
         {
             get
@@ -35,10 +38,20 @@ namespace AP8PO
                 }
                 _loadPercent = value;
                 OnPropertyChanged();
-
+                OnPropertyChanged(nameof(MaxLoad));
             }
 
-        } 
+        }
+
+        public int CurrentLoad 
+        {
+            get => _currentLoad;
+            set
+            {
+                _currentLoad = value;
+                OnPropertyChanged();
+            }
+        }
         public int MaxLoad => (int)(FullTimeMaxHours * LoadPercent / 100.0);
 
         //public LoadTypes LT { get; set; }
@@ -72,22 +85,7 @@ namespace AP8PO
                     default: return LoadTypes.Agreement;
                 }
         }
-        public ICollection<CourseCommit> Commits { get; set; }
-
-        public DbEmployee ToDbEmployee()
-        {
-            return new DbEmployee()
-            {
-                Name = this.FirstName,
-                Surname = this.Surname,
-                Telephone = this.Telephone,
-                WorkEmail = this.WorkEmail,
-                PrivateEmail = this.PrivateEmail,
-                Doctorand = this.Doctorand,
-                LoadPercent = this.LoadPercent,
-                //Commits = this.Commits.ToList()
-            };
-        }
+        public ObservableCollection<CourseCommit> Commits { get; set; } = new ObservableCollection<CourseCommit>();
 
         public override string ToString()
         {

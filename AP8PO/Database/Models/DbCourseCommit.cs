@@ -14,7 +14,7 @@ namespace AP8PO.Database.Models
         public int Hours { get; set; }
         public int NumberOfStudents { get; set; }
         //public Course Course { get; set; }
-        public DbEmployee Employee { get; set; }
+        //public DbEmployee Employee { get; set; }
         public CourseType CourseType { get; set; }
         public Language Language { get; set; }
     }
