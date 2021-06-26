@@ -69,6 +69,7 @@
     </ApplicationDefinition>
     <Compile Include="Application\Extensions.cs" />
     <Compile Include="Application\Models\Model.cs" />
+    <Compile Include="Converters\OverworkedConverter.cs" />
     <Compile Include="MockData\MockCourseData.cs" />
     <Compile Include="MockData\MockEmployeeData.cs" />
     <Page Include="MainWindow.xaml">

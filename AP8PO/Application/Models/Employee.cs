@@ -2,6 +2,7 @@
 using AP8PO.Enums;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AP8PO
 {
@@ -39,10 +40,23 @@ namespace AP8PO
                 _loadPercent = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(MaxLoad));
+                OnPropertyChanged(nameof(ActualLoadPercent));
+                OnPropertyChanged(nameof(CurrentLoad));
             }
 
         }
 
+        [NotMapped]
+        public int ActualLoadPercent 
+        {
+            get
+            {
+                if (MaxLoad == 0)
+                    return 0;
+                return (int)(CurrentLoad / (double)MaxLoad * 100.0);
+
+            }
+        }
         public int CurrentLoad 
         {
             get => _currentLoad;
@@ -50,6 +64,7 @@ namespace AP8PO
             {
                 _currentLoad = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(ActualLoadPercent));
             }
         }
         public int MaxLoad => (int)(FullTimeMaxHours * LoadPercent / 100.0);
@@ -71,8 +86,11 @@ namespace AP8PO
                 {
                     LoadPercent = val;
                     OnPropertyChanged(nameof(LoadPercent));
+                    OnPropertyChanged(nameof(ActualLoadPercent));
                 }
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentLoad));
+
             }
         }
 

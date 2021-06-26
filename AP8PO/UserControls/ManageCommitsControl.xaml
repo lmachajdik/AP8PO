@@ -47,7 +47,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="1" Margin="0,0,10,0" Content="Assigned employee" />
-                        <DataGrid x:Name="allCoursesList" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding DataContext.AssignedEmployee, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type local1:ManageCommitsControl}}}">
+                        <DataGrid x:Name="allCoursesList" Grid.Row="2" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" ItemsSource="{Binding DataContext.AssignedEmployee, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type local1:ManageCommitsControl}}}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" IsReadOnly="True"/>

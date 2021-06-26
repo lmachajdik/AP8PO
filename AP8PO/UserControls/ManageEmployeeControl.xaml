@@ -4,12 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:usercontrols="clr-namespace:AP8PO.UserControls" 
+             xmlns:converters="clr-namespace:AP8PO.Converters" 
              xmlns:System="clr-namespace:System;assembly=mscorlib" 
              xmlns:ap8po="clr-namespace:AP8PO" xmlns:mockdata="clr-namespace:AP8PO.MockData"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
+            <converters:OverworkedConverter x:Key="OverworkedConverter"/>
             <mockdata:MockEmployeeData x:Key="DesignViewModel"/>
             <ObjectDataProvider x:Key="EnumDataProvider" 
                     MethodName="GetValues" 
@@ -33,13 +35,38 @@
                   x:Name="list" 
                   d:DataContext="{Binding Source={StaticResource DesignViewModel}}" 
                   ItemsSource="{Binding MockData}" 
-                  AutoGenerateColumns="True"
+                  AutoGenerateColumns="False"
                   CanUserAddRows="True">
             <DataGrid.ContextMenu>
                 <ContextMenu >
                     <MenuItem Header="Delete me" Click="DeleteEmployeeButton_Click" DataContext="{Binding list.DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Employee}}}" ></MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
+                <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding WorkEmail}"/>
+                <DataGridTextColumn Header="Private Email" Binding="{Binding PrivateEmail }"/>
+                <DataGridCheckBoxColumn Header="Doctorand" Binding="{Binding Doctorand}"/>
+                <DataGridTextColumn Header="LoadPercent" Binding="{Binding LoadPercent}"/>
+                <DataGridTextColumn Header="Current Load" Binding="{Binding CurrentLoad}" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}" >
+                            <Setter Property="Background" Value="White"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ActualLoadPercent, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource OverworkedConverter}}" Value="True">
+                                    <Setter Property="Background" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+
+                <DataGridTextColumn Header="Max Load" Binding="{Binding MaxLoad}" IsReadOnly="True"/>
+                <DataGridComboBoxColumn x:Name="LoadTypeCombobox" Header="Load Type" SelectedItemBinding="{Binding LoadType}"/>
+            </DataGrid.Columns>
             <!--
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
