@@ -149,7 +149,9 @@ namespace AP8PO.UserControls
 
         private void GenerateCommits_ButtonClick(object sender, RoutedEventArgs e)
         {
-            GenerateCommits();
+            if(MessageBox.Show("Are you sure you want to generate new commits?", "",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                GenerateCommits();
+             
         }
 
         private IList<CourseCommit> generateClasses(Course course, CourseType courseType)
@@ -261,6 +263,22 @@ namespace AP8PO.UserControls
             employee.CurrentLoad += commit.Hours;
             AssignedEmployee[0] = employee;
             ViewModel.ConfirmChanges();
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            var cb = sender as CheckBox;
+            if ((bool)cb.IsChecked == true)
+            {
+                list.ItemsSource = new ObservableCollection<CourseCommit>(
+                    from item in DataConnection.DbContext.CourseCommits.Local
+                    where item.Employee == null
+                    select item);
+            }
+            else
+            {
+                list.ItemsSource = DataConnection.DbContext.CourseCommits.Local;
+            }
         }
     }
 }

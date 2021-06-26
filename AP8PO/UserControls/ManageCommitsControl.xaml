@@ -20,7 +20,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Click="GenerateCommits_ButtonClick" Content="Generate commits"/>
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Click="CheckBox_Click">Filter assigned</CheckBox>
+            <Button Click="GenerateCommits_ButtonClick" Content="Generate commits"/>
+        </StackPanel>
+
         <DataGrid Grid.Row="1" x:Name="list" ItemsSource="{Binding CourseCommits}" IsReadOnly="True" AutoGenerateColumns="False" CanUserSortColumns="True"
                       ScrollViewer.CanContentScroll="True" 
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
