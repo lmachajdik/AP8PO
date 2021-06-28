@@ -59,7 +59,7 @@ namespace AP8PO.UserControls
     /// <summary>
     /// Interaction logic for ManageCourseControl.xaml
     /// </summary>
-    public partial class ManageCourseControl : UserControl
+    public partial class ManageCourseControl : UserControl, ITab
     {
         public CourseViewModel ViewModel = new CourseViewModel();
         public IList<Course> Courses;
@@ -79,25 +79,25 @@ namespace AP8PO.UserControls
             list.Columns[0].Visibility = Visibility.Hidden;
             list.Columns[1].Visibility = Visibility.Hidden;
             list.Columns[2].Visibility = Visibility.Hidden;
+            list.Columns[5].Header = "Students";
+            list.Columns[6].Header = "Weeks";
         }
 
-        private void AddCourseButton_Click(object sender, RoutedEventArgs e)
+
+        private void DeleteCourseButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteSelectedRecord();
+        }
+
+        public void AddRecord()
         {
             ViewModel.CreateNew();
         }
 
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.ConfirmChanges();
-        }
-
-        private void DeleteCourseButton_Click(object sender, RoutedEventArgs e)
+        public void DeleteSelectedRecord()
         {
             if (list.SelectedItem is Course)
-            {
-                Course course = (Course)list.SelectedItem;
-                ViewModel.Remove(course);
-            }
+                ViewModel.Remove(list.SelectedItem as Course);
         }
     }
 }

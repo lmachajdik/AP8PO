@@ -12,8 +12,8 @@ namespace AP8PO
     {
         public DatabaseContext() : base()
         {
-            //System.Data.Entity.Database.SetInitializer<DatabaseContext>(new CreateDatabaseIfNotExists<DatabaseContext>());
-           System.Data.Entity.Database.SetInitializer<DatabaseContext>(new DropCreateDatabaseIfModelChanges<DatabaseContext>());
+            System.Data.Entity.Database.SetInitializer<DatabaseContext>(new CreateDatabaseIfNotExists<DatabaseContext>());
+           //System.Data.Entity.Database.SetInitializer<DatabaseContext>(new DropCreateDatabaseIfModelChanges<DatabaseContext>());
         }
 
         public DbSet<Employee> Employees { get; set; }

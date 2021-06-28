@@ -23,15 +23,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="40"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <ToolBarPanel Orientation="Horizontal" Grid.Row="0">
-                <Button DockPanel.Dock="Bottom" Click="AddEmployeeButton_Click" Margin="5,10,5,10" HorizontalAlignment="Center" VerticalAlignment="Bottom">Add Employee</Button>
-                <Button Click="ConfirmButton_Click" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,10,5,10">Confirm Changes</Button>
-        </ToolBarPanel>
-        <DataGrid Grid.Row="1"
+        <DataGrid 
                   x:Name="list" 
                   d:DataContext="{Binding Source={StaticResource DesignViewModel}}" 
                   ItemsSource="{Binding MockData}" 

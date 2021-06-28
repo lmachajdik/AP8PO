@@ -15,15 +15,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="40"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <ToolBarPanel Orientation="Horizontal" Grid.Row="0">
-            <Button DockPanel.Dock="Bottom" Click="AddGroupButton_Click" Margin="5,10,5,10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Add Group"/>
-            <Button Click="ConfirmButton_Click" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,10,5,10" Content="Confirm Changes"/>
-        </ToolBarPanel>
-        <DataGrid x:Name="list" Grid.Row="1" d:DataContext="{Binding Source={StaticResource DesignViewModel}}" 
+        <DataGrid x:Name="list" d:DataContext="{Binding Source={StaticResource DesignViewModel}}" 
                   ItemsSource="{Binding MockData}" 
                   CanUserAddRows="True">
             <DataGrid.ContextMenu>

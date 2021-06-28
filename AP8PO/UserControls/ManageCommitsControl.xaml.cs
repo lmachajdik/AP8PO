@@ -11,6 +11,12 @@ using System.Windows.Documents;
 
 namespace AP8PO.UserControls
 {
+    public interface ITab
+    {
+        void AddRecord();
+        void DeleteSelectedRecord();
+    }
+
     public class CommitsViewModel : Model
     {
         public CommitsViewModel()
@@ -40,7 +46,7 @@ namespace AP8PO.UserControls
     /// <summary>
     /// Interaction logic for ManageCommitsControl.xaml
     /// </summary>
-    public partial class ManageCommitsControl : UserControl
+    public partial class ManageCommitsControl : UserControl, ITab
     {
         public CommitsViewModel ViewModel { get; set; } = new CommitsViewModel();
 
@@ -273,7 +279,7 @@ namespace AP8PO.UserControls
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             var cb = sender as CheckBox;
-            if ((bool)cb.IsChecked == true)
+            if ((bool)cb.IsChecked == false)
             {
                 list.ItemsSource = new ObservableCollection<CourseCommit>(
                     from item in DataConnection.DbContext.CourseCommits.Local
@@ -284,9 +290,21 @@ namespace AP8PO.UserControls
             {
                 list.ItemsSource = DataConnection.DbContext.CourseCommits.Local;
             }
+            e.Handled = true;
         }
 
         private void DeleteCommitItem_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteSelectedRecord();
+        }
+
+        public void AddRecord()
+        {
+            DataConnection.DbContext.Insert(new CourseCommit());
+            list.ItemsSource = DataConnection.DbContext.CourseCommits.Local; 
+        }
+
+        public void DeleteSelectedRecord()
         {
             DataConnection.DbContext.CourseCommits.Local.Remove(list.SelectedItem as CourseCommit);
         }

@@ -6,8 +6,26 @@
         xmlns:local="clr-namespace:AP8PO" xmlns:local1="clr-namespace:AP8PO.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TabControl x:Name="tabControl" TabStripPlacement="Left">
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="NewCommand_CanExecute" Executed="NewCommand_Executed" />
+        <CommandBinding Command="Save" CanExecute="SaveCommand_CanExecute" Executed="SaveCommand_Executed" />
+        <CommandBinding Command="Open" CanExecute="OpenCommand_CanExecute" Executed="OpenCommand_Executed" />
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Command="New" />
+                <MenuItem Command="Open" />
+                <MenuItem Command="Save" />
+                <Separator />
+                <MenuItem Header="_Exit" Click="ExitItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Click="AddItem_Click" Header="Add record" />
+                <MenuItem Click="DeleteItem_Click" Header="Delete record" />
+            </MenuItem>
+        </Menu>
+        <TabControl x:Name="tabControl" TabStripPlacement="Left" >
             <TabItem Header="Employee">
                 <local1:ManageEmployeeControl></local1:ManageEmployeeControl>
             </TabItem>
@@ -21,5 +39,5 @@
                 <local1:ManageCommitsControl/>
             </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </Window>

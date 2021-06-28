@@ -41,7 +41,7 @@ namespace AP8PO
     /// <summary>
     /// Interaction logic for ManageGroupControl.xaml
     /// </summary>
-    public partial class ManageGroupControl : UserControl
+    public partial class ManageGroupControl : UserControl, ITab
     {
         public GroupViewModel ViewModel = new GroupViewModel();
 
@@ -75,11 +75,19 @@ namespace AP8PO
                     {
                         var group = tb.DataContext as Group;
                         group.StudentsCount = num;
-                        MessageBox.Show("Because you have changed number of students, commits will be re-generated.");
-                        ManageCommitsControl a = ((Application.Current.MainWindow.Content as Grid).Children[0] as TabControl)
-                            .Items.OfType<TabItem>()
-                            .Where(o => o.Content.GetType() == typeof(ManageCommitsControl)).FirstOrDefault().Content as ManageCommitsControl;
-                        a.GenerateCommits();
+
+                        try
+                        {
+                            ManageCommitsControl a = ((Application.Current.MainWindow.Content as Grid).Children[0] as TabControl)
+                                .Items.OfType<TabItem>()
+                                .Where(o => o.Content.GetType() == typeof(ManageCommitsControl)).FirstOrDefault().Content as ManageCommitsControl;
+                            a.GenerateCommits();
+                            MessageBox.Show("Because you have changed number of students, commits will be re-generated.");
+                        }
+                        catch{}
+
+                        
+                        
                     }  
                 }
 
@@ -92,23 +100,9 @@ namespace AP8PO
             list.Columns[list.Columns.Count-1].Visibility = Visibility.Hidden;
         }
 
-        private void AddGroupButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.CreateNew();
-        }
-
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.ConfirmChanges();
-        }
-
         private void DeleteGroupButton_Click(object sender, RoutedEventArgs e)
         {
-            if (list.SelectedItem is Group)
-            {
-                Group group = (Group)list.SelectedItem;
-                ViewModel.Remove(group);
-            }
+            DeleteSelectedRecord();
         }
 
         private void AssignButtonClick(object sender, RoutedEventArgs e)
@@ -143,6 +137,20 @@ namespace AP8PO
             course.Group = null;
             ViewModel.ConfirmChanges();
             
+        }
+
+        public void AddRecord()
+        {
+            ViewModel.CreateNew();
+        }
+
+        public void DeleteSelectedRecord()
+        {
+            if (list.SelectedItem is Group)
+            {
+                Group group = (Group)list.SelectedItem;
+                ViewModel.Remove(group);
+            }
         }
     }
 }

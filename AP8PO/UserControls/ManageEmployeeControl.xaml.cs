@@ -61,7 +61,7 @@ namespace AP8PO.UserControls
     /// <summary>
     /// Interaction logic for ManageEployeeControl.xaml
     /// </summary>
-    public partial class ManageEmployeeControl : UserControl
+    public partial class ManageEmployeeControl : UserControl, ITab
     {
         public EmployeeViewModel ViewModel = new EmployeeViewModel();
 
@@ -73,24 +73,23 @@ namespace AP8PO.UserControls
             LoadTypeCombobox.ItemsSource = Enum.GetValues(typeof(LoadTypes)).OfType<LoadTypes>().ToList();
         }
 
-
-        private void AddEmployeeButton_Click(object sender, RoutedEventArgs e)
+        public void AddRecord()
         {
             ViewModel.CreateNew();
         }
 
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.ConfirmChanges();
-        }
-
-        private void DeleteEmployeeButton_Click(object sender, RoutedEventArgs e)
+        public void DeleteSelectedRecord()
         {
             if (list.SelectedItem is Employee)
             {
                 Employee employee = (Employee)list.SelectedItem;
                 ViewModel.Remove(employee);
             }
+        }
+
+        private void DeleteEmployeeButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteSelectedRecord();
         }
     }
 }
