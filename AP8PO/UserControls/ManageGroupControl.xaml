@@ -28,7 +28,7 @@
                   CanUserAddRows="True">
             <DataGrid.ContextMenu>
                 <ContextMenu >
-                    <MenuItem Header="Delete me" Click="DeleteGroupButton_Click" DataContext="{Binding list.DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Group}}}" />
+                    <MenuItem Header="Delete" Click="DeleteGroupButton_Click" DataContext="{Binding list.DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Group}}}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.RowDetailsTemplate>

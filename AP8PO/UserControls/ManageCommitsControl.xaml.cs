@@ -285,5 +285,10 @@ namespace AP8PO.UserControls
                 list.ItemsSource = DataConnection.DbContext.CourseCommits.Local;
             }
         }
+
+        private void DeleteCommitItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataConnection.DbContext.CourseCommits.Local.Remove(list.SelectedItem as CourseCommit);
+        }
     }
 }
