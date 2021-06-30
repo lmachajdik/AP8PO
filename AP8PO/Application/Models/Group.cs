@@ -1,4 +1,6 @@
-﻿using AP8PO.Enums;
+﻿using AP8PO.Converters;
+using AP8PO.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -9,8 +11,6 @@ namespace AP8PO
     {
         private ObservableCollection<Course> courses;
 
-        [Key]
-        public int ID { get; set; }
         public string Name { get; set; }
         public string Abbrevation { get; set; }
 
@@ -21,6 +21,7 @@ namespace AP8PO
         public int StudentsCount { get; set; }
         public int Year { get; set; }
 
+        [JsonConverter(typeof(IDArrayToStringConverter<Course>))]
         public ObservableCollection<Course> Courses 
         { 
             get => courses;

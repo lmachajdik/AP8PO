@@ -36,5 +36,14 @@ namespace AP8PO
         {
             _dbContext = new DatabaseContext();
         }
+
+        public static void CreateNewContext()
+        {  
+            _dbContext.CourseCommits.Local.Clear();
+            _dbContext.Courses.Local.Clear();
+            _dbContext.Groups.Local.Clear();
+            _dbContext.Employees.Local.Clear();
+            _dbContext.SaveChanges();
+        }
     }
 }

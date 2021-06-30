@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,10 +12,7 @@ namespace AP8PO
         private string name;
         private string abbrevation;
 
-        [Key]
-        public int ID { get; set; }
-
-        [ForeignKey("Group")]
+        [ForeignKey(nameof(Group))]
         public int? GroupID
         {
             get => groupID;
@@ -24,6 +22,8 @@ namespace AP8PO
                 OnPropertyChanged();
             }
         }
+
+        [JsonIgnore]
         public Group Group
         {
             get => group;

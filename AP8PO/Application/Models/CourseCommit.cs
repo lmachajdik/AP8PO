@@ -1,17 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AP8PO
 {
     public class CourseCommit : Model
     {
         private Employee employee;
+        private int? employeeID;
+        private int? courseID;
 
-        public int ID { get; set; }
         public string Name { get; set; }
         public string Abbrevation { get; set; }
         public int Hours { get; set; }
         public int NumberOfStudents { get; set; }
+
+        [JsonIgnore]
         public Course Course { get; set; }
+
+        [ForeignKey(nameof(Course))]
+        public int? CourseID
+        {
+            get => courseID;
+            set
+            {
+                courseID = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [ForeignKey(nameof(Employee))]
+        public int? EmployeeID
+        {
+            get => employeeID;
+            set
+            {
+                employeeID = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
         public Employee Employee 
         { 
             get => employee;

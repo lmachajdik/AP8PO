@@ -1,5 +1,7 @@
-﻿using AP8PO.Database.Models;
+﻿using AP8PO.Converters;
+using AP8PO.Database.Models;
 using AP8PO.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,7 +14,6 @@ namespace AP8PO
 
         public const int FullTimeMaxHours = 160;
 
-        public int ID { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Telephone { get; set; }
@@ -103,6 +104,8 @@ namespace AP8PO
                     default: return LoadTypes.Agreement;
                 }
         }
+
+        [JsonConverter(typeof(IDArrayToStringConverter<CourseCommit>))]
         public ObservableCollection<CourseCommit> Commits { get; set; } = new ObservableCollection<CourseCommit>();
 
         public override string ToString()
