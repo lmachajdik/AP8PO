@@ -68,7 +68,7 @@
                                 <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Email" Binding="{Binding WorkEmail}" IsReadOnly="True"/>
                                 <DataGridCheckBoxColumn Header="Doctorand" Binding="{Binding Doctorand}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="LoadPercent" Binding="{Binding LoadPercent}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Allocation (%)" Binding="{Binding AllocationPercent}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Current Load" Binding="{Binding CurrentLoad}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="MaxLoad" Binding="{Binding MaxLoad}" IsReadOnly="True"/>
                                 <DataGridTemplateColumn Header="">

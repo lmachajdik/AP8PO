@@ -78,11 +78,15 @@ namespace AP8PO
 
                         try
                         {
-                            ManageCommitsControl a = ((Application.Current.MainWindow.Content as Grid).Children[0] as TabControl)
-                                .Items.OfType<TabItem>()
-                                .Where(o => o.Content.GetType() == typeof(ManageCommitsControl)).FirstOrDefault().Content as ManageCommitsControl;
-                            a.GenerateCommits();
-                            MessageBox.Show("Because you have changed number of students, commits will be re-generated.");
+                            var grid = (Application.Current.MainWindow.Content as Grid);
+                            if (grid != null)
+                            {
+                                ManageCommitsControl a = (grid.Children[0] as TabControl)
+                                    .Items.OfType<TabItem>()
+                                    .Where(o => o.Content.GetType() == typeof(ManageCommitsControl)).FirstOrDefault().Content as ManageCommitsControl;
+                                a.GenerateCommits();
+                                MessageBox.Show("Because you have changed number of students, commits will be re-generated.");
+                            }
                         }
                         catch{}
 

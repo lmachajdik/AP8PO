@@ -21,14 +21,14 @@ namespace AP8PO
         public string PrivateEmail { get; set; }
         public bool Doctorand { get; set; }
 
-        private int _loadPercent;
+        private int _allocationPercent;
         private int _currentLoad;
 
-        public int LoadPercent //uvazok - 100% = fullTime
+        public int AllocationPercent //uvazok - 100% = fullTime
         {
             get
             {
-                return _loadPercent;
+                return _allocationPercent;
             }
             set
             {            
@@ -38,7 +38,7 @@ namespace AP8PO
                     LoadType = val;
                     OnPropertyChanged(nameof(LoadType));
                 }
-                _loadPercent = value;
+                _allocationPercent = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(MaxLoad));
                 OnPropertyChanged(nameof(ActualLoadPercent));
@@ -68,7 +68,7 @@ namespace AP8PO
                 OnPropertyChanged(nameof(ActualLoadPercent));
             }
         }
-        public int MaxLoad => (int)(FullTimeMaxHours * LoadPercent / 100.0);
+        public int MaxLoad => (int)(FullTimeMaxHours * AllocationPercent / 100.0);
 
         //public LoadTypes LT { get; set; }
         private LoadTypes _loadType;
@@ -83,10 +83,10 @@ namespace AP8PO
                 _loadType = value;
                 int val = (int)value;
                 
-                if (LoadPercent != val)
+                if (AllocationPercent != val)
                 {
-                    LoadPercent = val;
-                    OnPropertyChanged(nameof(LoadPercent));
+                    AllocationPercent = val;
+                    OnPropertyChanged(nameof(AllocationPercent));
                     OnPropertyChanged(nameof(ActualLoadPercent));
                 }
                 OnPropertyChanged();

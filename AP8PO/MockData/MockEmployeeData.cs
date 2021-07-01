@@ -13,7 +13,7 @@ namespace AP8PO.MockData
                 {
                     FirstName = "Erik",
                     Surname = "Kral",
-                    LoadPercent = 100,
+                    AllocationPercent = 100,
                     WorkEmail = "ekral@utb.cz",
                     PrivateEmail = "kral@gmail.com",
                     Doctorand=false,
@@ -23,7 +23,7 @@ namespace AP8PO.MockData
                 {
                     FirstName = "Tomas",
                     Surname = "Juřena",
-                    LoadPercent = 100,
+                    AllocationPercent = 100,
                     WorkEmail = "jurena@utb.cz",
                     Doctorand=true,
                     Telephone="+42087654321"

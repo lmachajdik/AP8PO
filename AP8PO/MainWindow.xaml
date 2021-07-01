@@ -17,6 +17,7 @@
                 <MenuItem Command="New" />
                 <MenuItem Command="Open" />
                 <MenuItem Command="Save" />
+                <MenuItem Header="Send as Email" Click="MenuItem_Click"/>
                 <Separator />
                 <MenuItem Header="_Exit" Click="ExitItem_Click"/>
             </MenuItem>

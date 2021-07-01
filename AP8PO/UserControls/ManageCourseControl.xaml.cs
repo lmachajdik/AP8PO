@@ -78,7 +78,7 @@ namespace AP8PO.UserControls
         {
             list.Columns[0].Visibility = Visibility.Hidden;
             list.Columns[1].Visibility = Visibility.Hidden;
-            list.Columns[4].Header = "Students";
+            list.Columns[4].Header = "Max Students";
             list.Columns[5].Header = "Weeks";
             list.Columns[list.Columns.Count - 1].Visibility = Visibility.Hidden;
         }

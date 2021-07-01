@@ -1,6 +1,8 @@
 ﻿using AP8PO.Converters;
 using AP8PO.Database.Models;
 using AP8PO.UserControls;
+using FluentEmail.Core;
+using FluentEmail.Smtp;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using OfficeOpenXml;
@@ -10,6 +12,8 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +37,7 @@ namespace AP8PO
         {
             InitializeComponent();
         }
+
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -60,57 +65,62 @@ namespace AP8PO
                 MessageBox.Show("Cannot save empty database.");
                 return;
             }
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            
             DataConnection.DbContext.SaveChanges();
+
             var spd = new SaveFileDialog();
-            spd.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm | All files|*.*";
+            spd.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
             if (spd.ShowDialog().GetValueOrDefault() == true)
             {
-                try
-                {
-                    DataTable coursesTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(DataConnection.DbContext.Courses.Local), (typeof(DataTable)));
-                    DataTable employeesTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(DataConnection.DbContext.Employees.Local), (typeof(DataTable)));
-                    DataTable groupTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(DataConnection.DbContext.Groups.Local), (typeof(DataTable)));
-                    DataTable courseCommitsTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(DataConnection.DbContext.CourseCommits.Local), (typeof(DataTable)));
-
-                    FileInfo filePath = new FileInfo(spd.FileName);
-
-                    if (File.Exists(spd.FileName))
-                        File.Delete(spd.FileName);
-
-                    using (var excelPack = new ExcelPackage(filePath))
-                    {
-                        if (DataConnection.DbContext.Courses.Local.Count != 0)
-                        {
-                            var cws = excelPack.Workbook.Worksheets.Add("Courses");
-                            cws.Cells.LoadFromDataTable(coursesTable, true, OfficeOpenXml.Table.TableStyles.Light8);
-                        }
-                        if (DataConnection.DbContext.Employees.Local.Count != 0)
-                        {
-                            var ews = excelPack.Workbook.Worksheets.Add("Employees");
-                            ews.Cells.LoadFromDataTable(employeesTable, true, OfficeOpenXml.Table.TableStyles.Light8);
-                        }
-                        if (DataConnection.DbContext.Groups.Local.Count != 0)
-                        {
-                            var gws = excelPack.Workbook.Worksheets.Add("Groups");
-                            gws.Cells.LoadFromDataTable(groupTable, true, OfficeOpenXml.Table.TableStyles.Light8);
-                        }
-                        if (DataConnection.DbContext.CourseCommits.Local.Count != 0)
-                        {
-                            var cmws = excelPack.Workbook.Worksheets.Add("CourseCommits");
-                            cmws.Cells.LoadFromDataTable(courseCommitsTable, true, OfficeOpenXml.Table.TableStyles.Light8);
-                        }
-
-                        excelPack.Save();
-                   }
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show($"Unexpected message occure. Error message: {ex.Message}");
-                }
+                FileInfo filePath = new FileInfo(spd.FileName);
+                SaveFile(filePath);
             }
         }
-                
+        private void SaveFile(FileInfo filePath)
+        {
+            try
+            {
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                DataTable coursesTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(DataConnection.DbContext.Courses.Local), (typeof(DataTable)));
+                DataTable employeesTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(DataConnection.DbContext.Employees.Local), (typeof(DataTable)));
+                DataTable groupTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(DataConnection.DbContext.Groups.Local), (typeof(DataTable)));
+                DataTable courseCommitsTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(DataConnection.DbContext.CourseCommits.Local), (typeof(DataTable)));
+
+                if (File.Exists(filePath.FullName))
+                    File.Delete(filePath.FullName);
+
+                using (var excelPack = new ExcelPackage(filePath))
+                {
+                    if (DataConnection.DbContext.Courses.Local.Count != 0)
+                    {
+                        var cws = excelPack.Workbook.Worksheets.Add("Courses");
+                        cws.Cells.LoadFromDataTable(coursesTable, true, OfficeOpenXml.Table.TableStyles.Light8);
+                    }
+                    if (DataConnection.DbContext.Employees.Local.Count != 0)
+                    {
+                        var ews = excelPack.Workbook.Worksheets.Add("Employees");
+                        ews.Cells.LoadFromDataTable(employeesTable, true, OfficeOpenXml.Table.TableStyles.Light8);
+                    }
+                    if (DataConnection.DbContext.Groups.Local.Count != 0)
+                    {
+                        var gws = excelPack.Workbook.Worksheets.Add("Groups");
+                        gws.Cells.LoadFromDataTable(groupTable, true, OfficeOpenXml.Table.TableStyles.Light8);
+                    }
+                    if (DataConnection.DbContext.CourseCommits.Local.Count != 0)
+                    {
+                        var cmws = excelPack.Workbook.Worksheets.Add("CourseCommits");
+                        cmws.Cells.LoadFromDataTable(courseCommitsTable, true, OfficeOpenXml.Table.TableStyles.Light8);
+                    }
+                    excelPack.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Unexpected message occure. Error message: {ex.Message}");
+            }
+        }
+        
         private void OpenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
@@ -215,6 +225,18 @@ namespace AP8PO
         {
             var itab = (tabControl.SelectedItem as TabItem).Content as ITab;
             itab.DeleteSelectedRecord();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SendEmailDialog inputDialog = new SendEmailDialog();
+            if (inputDialog.ShowDialog() == true)
+            {
+                var email = inputDialog.Email;
+                FileInfo filePath = new FileInfo("tmp.xlsx");
+                SaveFile(filePath);
+                var res = EmailSender.Send(filePath, email);
+            }
         }
     }
 }

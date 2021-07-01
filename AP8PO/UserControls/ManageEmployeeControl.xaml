@@ -41,8 +41,8 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding WorkEmail}"/>
                 <DataGridTextColumn Header="Private Email" Binding="{Binding PrivateEmail }"/>
                 <DataGridCheckBoxColumn Header="Doctorand" Binding="{Binding Doctorand}"/>
-                <DataGridTextColumn Header="LoadPercent" Binding="{Binding LoadPercent}"/>
-                <DataGridTextColumn Header="Current Load" Binding="{Binding CurrentLoad}" IsReadOnly="True">
+                <DataGridTextColumn Header="Allocation (%)" Binding="{Binding AllocationPercent}"/>
+                <DataGridTextColumn Header="Current allocation (h)" Binding="{Binding CurrentLoad}" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}" >
                             <Setter Property="Background" Value="White"/>
@@ -56,7 +56,7 @@
                 </DataGridTextColumn>
 
 
-                <DataGridTextColumn Header="Max Load" Binding="{Binding MaxLoad}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Max Allocation" Binding="{Binding MaxLoad}" IsReadOnly="True"/>
                 <DataGridComboBoxColumn x:Name="LoadTypeCombobox" Header="Load Type" SelectedItemBinding="{Binding LoadType}"/>
             </DataGrid.Columns>
             <!--
