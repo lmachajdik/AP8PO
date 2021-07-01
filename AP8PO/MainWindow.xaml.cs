@@ -65,11 +65,16 @@ namespace AP8PO
                 MessageBox.Show("Cannot save empty database.");
                 return;
             }
-            
+
+            try
+            {
+
             DataConnection.DbContext.SaveChanges();
+            }
+            catch { }
 
             var spd = new SaveFileDialog();
-            spd.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+            spd.Filter = "Excel Files|*.xlsx;*.xls;*.xlsm";
             if (spd.ShowDialog().GetValueOrDefault() == true)
             {
                 FileInfo filePath = new FileInfo(spd.FileName);
@@ -139,7 +144,15 @@ namespace AP8PO
                     //Load excel stream
                     using (var stream = File.OpenRead(opd.FileName))
                     {
-                        excelPack.Load(stream);
+                        try
+                        {
+                            excelPack.Load(stream);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("File can't be loaded. Make sure the file is not corrupted.","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                            return;
+                        }
                         DataConnection.DbContext.Courses.Local.Clear();
                         DataConnection.DbContext.Employees.Local.Clear();
                         DataConnection.DbContext.Groups.Local.Clear();
@@ -173,7 +186,11 @@ namespace AP8PO
                         }     
                     }
                 }
-                DataConnection.DbContext.SaveChanges();
+                try
+                {
+                    DataConnection.DbContext.SaveChanges();
+                }
+                catch { }
             }
         }
 
@@ -233,9 +250,9 @@ namespace AP8PO
             if (inputDialog.ShowDialog() == true)
             {
                 var email = inputDialog.Email;
-                FileInfo filePath = new FileInfo("tmp.xlsx");
+                FileInfo filePath = new FileInfo("data.xlsx");
                 SaveFile(filePath);
-                var res = EmailSender.Send(filePath, email);
+                EmailSender.Send(filePath, email);
             }
         }
     }

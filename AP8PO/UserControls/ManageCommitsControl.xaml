@@ -61,7 +61,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="1" Margin="0,0,10,0" Content="Assigned employee" />
-                        <DataGrid x:Name="allCoursesList" Grid.Row="2" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" ItemsSource="{Binding DataContext.AssignedEmployee, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type local1:ManageCommitsControl}}}">
+                        <DataGrid x:Name="allCoursesList" Grid.Row="2" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" ItemsSource="{Binding DataContext.AssignedEmployee, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local1:ManageCommitsControl}}}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" IsReadOnly="True"/>
@@ -69,7 +69,7 @@
                                 <DataGridTextColumn Header="Email" Binding="{Binding WorkEmail}" IsReadOnly="True"/>
                                 <DataGridCheckBoxColumn Header="Doctorand" Binding="{Binding Doctorand}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Allocation (%)" Binding="{Binding AllocationPercent}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Current Load" Binding="{Binding CurrentLoad}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Current allocation (h)" Binding="{Binding CurrentLoad}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="MaxLoad" Binding="{Binding MaxLoad}" IsReadOnly="True"/>
                                 <DataGridTemplateColumn Header="">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -88,8 +88,8 @@
                                 <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Email" Binding="{Binding WorkEmail}" IsReadOnly="True"/>
                                 <DataGridCheckBoxColumn Header="Doctorand" Binding="{Binding Doctorand}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="LoadPercent" Binding="{Binding LoadPercent}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Current Load" Binding="{Binding CurrentLoad}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Allocation (%)" Binding="{Binding ActualLoadPercent}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Current allocation (h)" Binding="{Binding CurrentLoad}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="MaxLoad" Binding="{Binding MaxLoad}" IsReadOnly="True"/>
                                 <DataGridTemplateColumn Header="">
                                     <DataGridTemplateColumn.CellTemplate>

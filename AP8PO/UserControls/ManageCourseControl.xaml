@@ -22,7 +22,7 @@
                   CanUserAddRows="True">
             <DataGrid.ContextMenu>
                 <ContextMenu >
-                    <MenuItem Header="Delete" Click="DeleteCourseButton_Click" DataContext="{Binding list.DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Course}}}" ></MenuItem>
+                    <MenuItem Header="Delete" Click="DeleteCourseButton_Click" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Course}}}" ></MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <!--

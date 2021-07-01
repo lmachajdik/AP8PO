@@ -31,7 +31,7 @@
                   CanUserAddRows="True">
             <DataGrid.ContextMenu>
                 <ContextMenu >
-                    <MenuItem Header="Delete" Click="DeleteEmployeeButton_Click" DataContext="{Binding list.DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Employee}}}" ></MenuItem>
+                    <MenuItem Header="Delete" Click="DeleteEmployeeButton_Click" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ap8po:Employee}}}" ></MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
